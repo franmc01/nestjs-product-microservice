@@ -31,11 +31,16 @@ function validateEnv<T>(
   return value;
 }
 
+// Convert the keys of EnvVars to lowercase
+type LowercaseKeys<T> = {
+  [K in keyof T as Lowercase<K & string>]: T[K];
+};
+
 // Validate the environment variables and infer the type
 const validatedEnv = validateEnv(envSchema, process.env);
 
-// Export the validated environment variables with specific names
-export const envs = {
+// Define the envs object with lowercase keys
+export const envs: LowercaseKeys<EnvVars> = {
   port: validatedEnv.PORT,
-  databaseUrl: validatedEnv.DATABASE_URL,
+  database_url: validatedEnv.DATABASE_URL,
 };
