@@ -9,5 +9,5 @@ export class CreateProductDto {
   })
   @Min(0)
   @Type(() => Number)
-  price: string;
+  price: number;
 }
